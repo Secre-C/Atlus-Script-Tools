@@ -575,15 +575,15 @@
       },
       {
         "Index": 4,
-        "Name": "",
-        "Description": "",
+        "Name": "month",
+        "Description": "gets the month number",
         "Parameters": [
         ]
       },
       {
         "Index": 5,
-        "Name": "",
-        "Description": "",
+        "Name": "day",
+        "Description": "Gets the day number",
         "Parameters": [
         ]
       },
