@@ -1,43 +1,52 @@
-﻿namespace AtlusScriptLibrary.MessageScriptLanguage
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace AtlusScriptLibrary.MessageScriptLanguage;
+
+/// <summary>
+/// Represents a code point token. This maps to a glyph on the game's font.
+/// </summary>
+public struct CodePointToken : IToken
 {
+    public IReadOnlyList<byte> Bytes { get; }
+
     /// <summary>
-    /// Represents a code point token. This maps to a glyph on the game's font.
+    /// Constructs a new code point token from a high and low surrogate byte.
     /// </summary>
-    public struct CodePointToken : IToken
+    /// <param name="high">The high surrogate byte.</param>
+    /// <param name="low">The low surrogate byte.</param>
+    public CodePointToken(byte high, byte low)
     {
-        /// <summary>
-        /// Gets the high surrogate byte of the code point.
-        /// </summary>
-        public byte HighSurrogate { get; }
+        Bytes = new List<byte>() { high, low };
+    }
 
-        /// <summary>
-        /// Gets the low surrogate byte of the code point.
-        /// </summary>
-        public byte LowSurrogate { get; }
+    /// <summary>
+    /// Constructs a new code point token from a byte.
+    /// </summary>
+    public CodePointToken(byte value)
+    {
+        Bytes = new List<byte>() { value };
+    }
 
-        /// <summary>
-        /// Constructs a new code point token from a high and low surrogate byte.
-        /// </summary>
-        /// <param name="high">The high surrogate byte.</param>
-        /// <param name="low">The low surrogate byte.</param>
-        public CodePointToken( byte high, byte low )
-        {
-            HighSurrogate = high;
-            LowSurrogate = low;
-        }
+    /// <summary>
+    /// Constructs a new code point token from a list of bytes.
+    /// </summary>
+    public CodePointToken(List<byte> bytes)
+    {
+        Bytes = bytes;
+    }
 
-        /// <summary>
-        /// Gets the token type of this token.
-        /// </summary>
-        TokenKind IToken.Kind => TokenKind.CodePoint;
+    /// <summary>
+    /// Gets the token type of this token.
+    /// </summary>
+    TokenKind IToken.Kind => TokenKind.CodePoint;
 
-        /// <summary>
-        /// Converts this token to its string representation.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return $"[{HighSurrogate:X2} {LowSurrogate:X2}]";
-        }
+    /// <summary>
+    /// Converts this token to its string representation.
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        return $"[{string.Join(" ", Bytes.Select(x => x.ToString("X2")))}]";
     }
 }

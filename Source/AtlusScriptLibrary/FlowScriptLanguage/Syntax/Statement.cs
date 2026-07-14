@@ -1,6 +1,5 @@
-﻿namespace AtlusScriptLibrary.FlowScriptLanguage.Syntax
+﻿namespace AtlusScriptLibrary.FlowScriptLanguage.Syntax;
+
+public abstract class Statement : SyntaxNode, IStatement
 {
-    public abstract class Statement : SyntaxNode
-    {
-    }
 }

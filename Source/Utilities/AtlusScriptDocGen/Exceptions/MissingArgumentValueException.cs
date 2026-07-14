@@ -10,18 +10,14 @@ namespace AtlusScriptDocGen.Exceptions
 
         public string MissingValueDescription { get; }
 
-        public MissingArgumentValueException( string argumentName, string missingValueDescription ) : this(argumentName, missingValueDescription, null )
+        public MissingArgumentValueException(string argumentName, string missingValueDescription) : this(argumentName, missingValueDescription, null)
         {
         }
 
-        public MissingArgumentValueException( string argumentName, string missingValueDescription, Exception innerException ) : base( "", innerException )
+        public MissingArgumentValueException(string argumentName, string missingValueDescription, Exception innerException) : base("", innerException)
         {
             ArgumentName = argumentName;
             MissingValueDescription = missingValueDescription;
-        }
-
-        protected MissingArgumentValueException( SerializationInfo info, StreamingContext context ) : base( info, context )
-        {
         }
     }
 }
