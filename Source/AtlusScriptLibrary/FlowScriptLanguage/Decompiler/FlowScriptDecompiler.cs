@@ -201,7 +201,7 @@ public class FlowScriptDecompiler
                 return false;
             }
 
-            var importPath = MessageScriptFilePath.Replace(Path.GetDirectoryName(mFilePath), "").TrimStart('\\');
+            var importPath = MessageScriptFilePath.Replace(Path.GetDirectoryName(mFilePath), "").TrimStart(Path.DirectorySeparatorChar);
             mCompilationUnit.Imports.Add(new Import(importPath));
         }
 
